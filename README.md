@@ -1,8 +1,8 @@
 ## LCMS UI (DayVaHoc)
 
-Đây là UI cho dự án DayVaHoc (LCMS UI).
+UI cho dự án DayVaHoc (LCMS UI).
 
-Dự án này là một mô phỏng một Hệ thống Quản lý Nội dung Học tập (Learning Content Management System) hiện đại. Tập trung vào trải nghiệm người dùng sạch sẽ, responsive và nhất quán.
+Mô phỏng một Hệ thống Quản lý Nội dung Học tập (Learning Content Management System) hiện đại. Tập trung vào trải nghiệm người dùng sạch sẽ, responsive và nhất quán.
 
 ## Tính năng chính
 
