@@ -47,7 +47,7 @@ export default function ContentForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 text-foreground">
       <h1 className="text-xl font-semibold">
         {isEditing ? "Chỉnh sửa tài liệu" : "Tạo tài liệu mới"}
       </h1>
@@ -58,7 +58,9 @@ export default function ContentForm({
           <Input
             placeholder="Nhập tiêu đề tài liệu"
             value={formData.title}
-            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
           />
         </div>
         <div>
@@ -75,9 +77,11 @@ export default function ContentForm({
           <Label>Danh mục</Label>
           <Select
             value={formData.category}
-            onValueChange={(val) => setFormData({ ...formData, category: val })}
+            onValueChange={(val) =>
+              setFormData({ ...formData, category: val })
+            }
           >
-            <SelectTrigger className="w-full">
+            <SelectTrigger>
               <SelectValue placeholder="Chọn danh mục" />
             </SelectTrigger>
             <SelectContent>
@@ -89,12 +93,14 @@ export default function ContentForm({
             </SelectContent>
           </Select>
         </div>
+
         {!isEditing && (
           <div>
             <Label>Tệp tài liệu</Label>
             <label
               htmlFor="file"
-              className="block w-full p-6 text-center border border-dashed rounded-lg cursor-pointer hover:bg-gray-50"
+              className="block w-full p-6 text-center border border-dashed rounded-lg cursor-pointer 
+                         bg-background text-foreground hover:bg-muted transition"
             >
               <p>Kéo thả tệp hoặc nhấn để chọn</p>
               <input id="file" type="file" className="hidden" />

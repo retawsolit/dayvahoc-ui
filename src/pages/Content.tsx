@@ -24,7 +24,7 @@ export default function ContentPage() {
         {!showForm && (
           <button
             onClick={() => setShowForm(true)}
-            className="bg-primary text-white px-4 py-2 rounded-md text-sm"
+            className="bg-primary text-white dark:text-black px-4 py-2 rounded-md text-sm"
           >
             Tạo mới
           </button>

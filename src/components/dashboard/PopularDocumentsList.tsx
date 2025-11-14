@@ -8,14 +8,14 @@ const documents = [
 
 const PopularDocumentsList = () => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4">
+    <div className="bg-background text-foreground rounded-lg shadow-md p-4 border border-border">
       <h2 className="font-semibold text-lg mb-4">Tài liệu phổ biến nhất</h2>
       <ul className="space-y-3">
         {documents.map((doc, index) => (
           <li key={index} className="flex justify-between items-center">
             <div>
-              <p className="font-medium text-gray-800">{doc.title}</p>
-              <p className="text-sm text-gray-500">
+              <p className="font-medium">{doc.title}</p>
+              <p className="text-sm text-muted-foreground">
                 {doc.downloads} lượt tải • ⭐ {doc.rating}
               </p>
             </div>

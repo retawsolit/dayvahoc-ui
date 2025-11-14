@@ -6,9 +6,7 @@ import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Select = SelectPrimitive.Root;
-
 const SelectGroup = SelectPrimitive.Group;
-
 const SelectValue = SelectPrimitive.Value;
 
 const SelectTrigger = React.forwardRef<
@@ -18,7 +16,11 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none",
+      "flex h-10 w-full items-center justify-between rounded-md px-3 py-2 text-sm",
+      "bg-white text-gray-900 dark:bg-gray-900 dark:text-white",
+      "border border-gray-300 dark:border-gray-600",
+      "placeholder:text-gray-400 dark:placeholder:text-gray-500",
+      "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
       className
     )}
     {...props}
@@ -39,16 +41,14 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-80",
+        "z-50 min-w-[8rem] overflow-hidden rounded-md border",
+        "bg-white text-gray-900 dark:bg-gray-900 dark:text-white dark:border-gray-600",
+        "shadow-md animate-in fade-in-80",
         className
       )}
       {...props}
     >
-      <SelectPrimitive.Viewport
-        className={cn("p-1", className)}
-      >
-        {children}
-      </SelectPrimitive.Viewport>
+      <SelectPrimitive.Viewport className="p-1">{children}</SelectPrimitive.Viewport>
     </SelectPrimitive.Content>
   </SelectPrimitive.Portal>
 ));
@@ -61,7 +61,10 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 px-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground",
+      "flex items-center px-3 py-2 text-sm cursor-pointer rounded-md",
+      "bg-white text-gray-900 dark:bg-gray-900 dark:text-white",
+      "hover:bg-gray-100 dark:hover:bg-gray-700",
+      "focus:outline-none",
       className
     )}
     {...props}

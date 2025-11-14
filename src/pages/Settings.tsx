@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -12,61 +12,35 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/context/ThemeContext";
 
 const Settings = () => {
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
 
-  const [darkMode, setDarkMode] = useState(false);
-  const [syncWithSystem, setSyncWithSystem] = useState(true);
   const [notifyApp, setNotifyApp] = useState(true);
   const [notifyEmail, setNotifyEmail] = useState(true);
   const [autoSave, setAutoSave] = useState(true);
-
-useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else if (storedTheme === "light") {
-      setDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (syncWithSystem) {
-      const mq = window.matchMedia("(prefers-color-scheme: dark)");
-      const systemPref = mq.matches;
-      document.documentElement.classList.toggle("dark", systemPref);
-      setDarkMode(systemPref);
-
-      const handleChange = (e: MediaQueryListEvent) => {
-        document.documentElement.classList.toggle("dark", e.matches);
-        setDarkMode(e.matches);
-      };
-
-      mq.addEventListener("change", handleChange);
-      return () => mq.removeEventListener("change", handleChange);
-    } else {
-      document.documentElement.classList.toggle("dark", darkMode);
-      localStorage.setItem("theme", darkMode ? "dark" : "light");
-    }
-  }, [darkMode, syncWithSystem]);
 
   return (
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Cài đặt</h1>
-        <p className="text-gray-500">Quản lý các tùy chọn của bạn</p>
+        <p className="text-gray-500 dark:text-gray-300">
+          Quản lý các tùy chọn của bạn
+        </p>
       </div>
 
       <Card>
         <CardContent className="space-y-4 p-6">
           <div>
             <h2 className="text-lg font-semibold">Giao diện</h2>
-            <p className="text-sm text-gray-500">Tùy chỉnh hình thức của ứng dụng</p>
+            <p className="text-sm text-gray-500 dark:text-gray-300">
+              Tùy chỉnh hình thức của ứng dụng
+            </p>
           </div>
 
+          {/* DARK / LIGHT */}
           <div className="flex items-center justify-between">
             <div>
               <Label className="font-medium">Chế độ tối/sáng</Label>
@@ -74,23 +48,29 @@ useEffect(() => {
                 Chuyển đổi giữa giao diện tối và sáng
               </p>
             </div>
+
             <Switch
-              checked={darkMode}
+              checked={theme === "dark"}
               onCheckedChange={(checked) => {
-                setSyncWithSystem(false);
-                setDarkMode(checked === true);
+                setTheme(checked ? "dark" : "light");
               }}
             />
           </div>
 
+          {/* SYSTEM THEME */}
           <div className="flex items-center justify-between">
             <div>
-              <Label className="font-medium">Tự động chọn theo hệ thống</Label>
-              <p className="text-sm text-muted-foreground">Theo cài đặt của hệ điều hành</p>
+              <Label className="font-medium">Tự động theo hệ thống</Label>
+              <p className="text-sm text-muted-foreground">
+                Theo cài đặt hệ điều hành
+              </p>
             </div>
+
             <Checkbox
-              checked={syncWithSystem}
-              onCheckedChange={(checked) => setSyncWithSystem(checked === true)}
+              checked={theme === "system"}
+              onCheckedChange={(checked) => {
+                setTheme(checked ? "system" : "light");
+              }}
             />
           </div>
         </CardContent>

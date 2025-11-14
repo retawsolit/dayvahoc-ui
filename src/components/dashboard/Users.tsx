@@ -5,8 +5,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { Tabs, TabList, TabTrigger, TabContent } from "../ui/tabs";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../ui/card";
+import {
+  Tabs,
+  TabList,
+  TabTrigger,
+  TabContent,
+} from "../ui/tabs";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "../ui/card";
 import { Button } from "../ui/button";
 
 const profileSchema = z.object({
@@ -50,19 +61,19 @@ export default function Users() {
   });
 
   const onSubmitProfile = (data: z.infer<typeof profileSchema>) => {
-    console.log(" Thông tin cá nhân:", data);
+    console.log("Thông tin cá nhân:", data);
     alert("Lưu thông tin thành công!");
     resetProfile();
   };
 
   const onSubmitPassword = (data: z.infer<typeof passwordSchema>) => {
-    console.log(" Đổi mật khẩu:", data);
+    console.log("Đổi mật khẩu:", data);
     alert("Đổi mật khẩu thành công!");
     resetPassword();
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 text-foreground">
       <h1 className="text-2xl font-bold mb-1">Hồ sơ cá nhân</h1>
       <p className="text-sm text-muted-foreground mb-6">
         Quản lý thông tin tài khoản của bạn
@@ -79,7 +90,9 @@ export default function Users() {
             <Card>
               <CardHeader>
                 <CardTitle>Thông tin cá nhân</CardTitle>
-                <CardDescription>Cập nhật thông tin hồ sơ của bạn</CardDescription>
+                <CardDescription>
+                  Cập nhật thông tin hồ sơ của bạn
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Input

@@ -28,14 +28,16 @@ export const SheetContent = React.forwardRef<
     <Dialog.Content
       ref={ref}
       className={cn(
-        "fixed left-0 top-0 z-50 h-full w-64 bg-white shadow-lg border-r translate-x-0 transition-transform",
+        "fixed left-0 top-0 z-50 h-full w-64 shadow-lg border-r translate-x-0 transition-transform",
+        "bg-white text-gray-900 dark:bg-gray-900 dark:text-white",
+        "border border-gray-200 dark:border-gray-700",
         "data-[state=closed]:-translate-x-full data-[state=open]:translate-x-0",
         className
       )}
       {...props}
     >
       <div className="flex justify-end p-2">
-        <SheetClose className="text-gray-500 hover:text-black">
+        <SheetClose className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white">
           <X className="h-5 w-5" />
         </SheetClose>
       </div>

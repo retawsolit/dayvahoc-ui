@@ -55,13 +55,13 @@ const mockContents: Content[] = [
 function getTypeColor(type: string) {
   switch (type) {
     case "PDF":
-      return "bg-red-100 text-red-800";
+      return "bg-red-500/10 text-red-600 dark:bg-red-500/20 dark:text-red-300";
     case "DOCX":
-      return "bg-blue-100 text-blue-800";
+      return "bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-300";
     case "ZIP":
-      return "bg-yellow-100 text-yellow-800";
+      return "bg-yellow-500/10 text-yellow-700 dark:bg-yellow-500/20 dark:text-yellow-300";
     default:
-      return "bg-gray-100 text-gray-800";
+      return "bg-gray-500/10 text-gray-700 dark:bg-gray-500/20 dark:text-gray-300";
   }
 }
 
@@ -90,7 +90,7 @@ export default function ContentList({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-foreground">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-semibold">Quản lý nội dung</h1>
         <div className="flex gap-2">
@@ -98,10 +98,10 @@ export default function ContentList({
             placeholder="Tìm kiếm tài liệu..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-64 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-64 rounded-lg border px-4 py-2 text-sm bg-background text-foreground"
           />
           <Select value={filterType} onValueChange={setFilterType}>
-            <SelectTrigger className="w-40">
+            <SelectTrigger className="w-40 bg-background text-foreground border">
               <SelectValue placeholder="Tất cả loại" />
             </SelectTrigger>
             <SelectContent>
@@ -118,7 +118,7 @@ export default function ContentList({
         Tìm thấy {filteredContents.length} tài liệu
       </p>
 
-      <Card className="overflow-x-auto">
+      <Card className="overflow-x-auto bg-background text-foreground">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b text-left">
@@ -132,7 +132,10 @@ export default function ContentList({
           </thead>
           <tbody>
             {filteredContents.map((item) => (
-              <tr key={item.id} className="border-b hover:bg-gray-50">
+              <tr
+                key={item.id}
+                className="border-b hover:bg-muted transition-colors"
+              >
                 <td className="px-4 py-2">
                   <div className="font-medium">{item.title}</div>
                   <div className="text-muted-foreground text-xs">
