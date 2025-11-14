@@ -50,6 +50,8 @@ export default function ContentPage() {
                     category: "Test",
                     createdAt: "",
                     downloads: 0,
+                    size: "1.2MB",            
+                    uploaderRole: "admin",    
                   }
                 : undefined
             }

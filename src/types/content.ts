@@ -6,4 +6,6 @@ export type Content = {
   category: string;
   createdAt: string;
   downloads: number;
+  size?: string;
+  uploaderRole?: "admin" | "user";
 };
