@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 
+// Mock data được mở rộng để bảng trông đầy đủ hơn
 const mockContents: Content[] = [
   {
     id: "1",
@@ -49,6 +50,52 @@ const mockContents: Content[] = [
     category: "Database",
     createdAt: "2025-10-20",
     downloads: 123,
+  },
+  {
+    id: "5",
+    title: "Cấu trúc dữ liệu & Giải thuật",
+    description: "Phân tích thuật toán, cấu trúc dữ liệu cơ bản",
+    type: "PDF",
+    category: "Lập trình",
+    createdAt: "2025-10-18",
+    downloads: 312,
+  },
+  {
+    id: "6",
+    title: "Machine Learning Overview",
+    description:
+      "Tổng quan về machine learning, supervised và unsupervised learning",
+    type: "DOCX",
+    category: "AI",
+    createdAt: "2025-10-15",
+    downloads: 415,
+  },
+  {
+    id: "7",
+    title: "Web Security Handbook",
+    description: "Bảo mật web và OWASP Top 10",
+    type: "PDF",
+    category: "Security",
+    createdAt: "2025-10-12",
+    downloads: 203,
+  },
+  {
+    id: "8",
+    title: "Cẩm nang Git & GitHub",
+    description: "Branching model, GitHub Actions, workflow",
+    type: "ZIP",
+    category: "DevOps",
+    createdAt: "2025-10-10",
+    downloads: 98,
+  },
+  {
+    id: "9",
+    title: "UI/UX Design Guidelines",
+    description: "Các tiêu chuẩn thiết kế trải nghiệm người dùng hiện đại",
+    type: "DOCX",
+    category: "Design",
+    createdAt: "2025-10-07",
+    downloads: 167,
   },
 ];
 
@@ -90,18 +137,20 @@ export default function ContentList({
   };
 
   return (
-    <div className="space-y-6 text-foreground">
-      <div className="flex justify-between items-center">
-        <h1 className="text-xl font-semibold">Quản lý nội dung</h1>
-        <div className="flex gap-2">
+    <div className="max-w-screen-xl mx-auto px-4 py-6 space-y-6 text-foreground">
+      {/* Header + Filter */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <h1 className="text-3xl font-bold">Quản lý nội dung</h1>
+
+        <div className="flex flex-col sm:flex-row gap-2">
           <Input
             placeholder="Tìm kiếm tài liệu..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-64 rounded-lg border px-4 py-2 text-sm bg-background text-foreground"
+            className="sm:w-64 rounded-lg border px-4 py-2 text-sm bg-background text-foreground"
           />
           <Select value={filterType} onValueChange={setFilterType}>
-            <SelectTrigger className="w-40 bg-background text-foreground border">
+            <SelectTrigger className="sm:w-40 bg-background text-foreground border">
               <SelectValue placeholder="Tất cả loại" />
             </SelectTrigger>
             <SelectContent>
@@ -114,43 +163,45 @@ export default function ContentList({
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground italic mt-2">
+      {/* Kết quả lọc */}
+      <p className="text-sm text-muted-foreground italic">
         Tìm thấy {filteredContents.length} tài liệu
       </p>
 
-      <Card className="overflow-x-auto bg-background text-foreground">
-        <table className="w-full text-sm">
+      {/* Table */}
+      <Card className="overflow-x-auto bg-background text-foreground shadow-md rounded-xl">
+        <table className="w-full text-[15px]">
           <thead>
-            <tr className="border-b text-left">
-              <th className="px-4 py-2">Tiêu đề</th>
-              <th className="px-4 py-2">Loại</th>
-              <th className="px-4 py-2">Danh mục</th>
-              <th className="px-4 py-2">Ngày tạo</th>
-              <th className="px-4 py-2">Lượt tải</th>
-              <th className="px-4 py-2 text-right">Hành động</th>
+            <tr className="border-b text-left bg-muted/20">
+              <th className="px-6 py-4">Tiêu đề</th>
+              <th className="px-6 py-4">Loại</th>
+              <th className="px-6 py-4">Danh mục</th>
+              <th className="px-6 py-4">Ngày tạo</th>
+              <th className="px-6 py-4">Lượt tải</th>
+              <th className="px-6 py-4 text-right">Hành động</th>
             </tr>
           </thead>
           <tbody>
             {filteredContents.map((item) => (
               <tr
                 key={item.id}
-                className="border-b hover:bg-muted transition-colors"
+                className="border-b hover:bg-muted/50 transition-colors"
               >
-                <td className="px-4 py-2">
-                  <div className="font-medium">{item.title}</div>
+                <td className="px-6 py-4 font-medium">
+                  <div>{item.title}</div>
                   <div className="text-muted-foreground text-xs">
                     {item.description}
                   </div>
                 </td>
-                <td className="px-4 py-2">
+                <td className="px-6 py-4">
                   <Badge className={getTypeColor(item.type)}>
                     {item.type}
                   </Badge>
                 </td>
-                <td className="px-4 py-2">{item.category}</td>
-                <td className="px-4 py-2">{item.createdAt}</td>
-                <td className="px-4 py-2">{item.downloads}</td>
-                <td className="px-4 py-2 text-right space-x-2">
+                <td className="px-6 py-4">{item.category}</td>
+                <td className="px-6 py-4">{item.createdAt}</td>
+                <td className="px-6 py-4">{item.downloads}</td>
+                <td className="px-6 py-4 text-right space-x-2">
                   <Button
                     variant="ghost"
                     size="sm"
@@ -169,11 +220,12 @@ export default function ContentList({
                 </td>
               </tr>
             ))}
+
             {filteredContents.length === 0 && (
               <tr>
                 <td
                   colSpan={6}
-                  className="text-center py-6 text-muted-foreground"
+                  className="text-center py-8 text-muted-foreground"
                 >
                   Không tìm thấy tài liệu phù hợp.
                 </td>

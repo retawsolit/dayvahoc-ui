@@ -73,8 +73,8 @@ export default function Users() {
   };
 
   return (
-    <div className="p-6 text-foreground">
-      <h1 className="text-2xl font-bold mb-1">Hồ sơ cá nhân</h1>
+    <div className="max-w-screen-md mx-auto px-4 py-6 text-foreground">
+      <h1 className="text-3xl font-bold mb-2">Hồ sơ cá nhân</h1>
       <p className="text-sm text-muted-foreground mb-6">
         Quản lý thông tin tài khoản của bạn
       </p>
@@ -101,7 +101,7 @@ export default function Users() {
                   {...registerProfile("name")}
                   error={profileErrors.name?.message}
                 />
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Input
                     label="Email"
                     placeholder="user@lcms.edu"

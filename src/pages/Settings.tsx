@@ -23,7 +23,8 @@ const Settings = () => {
   const [autoSave, setAutoSave] = useState(true);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="max-w-screen-xl mx-auto px-4 py-6 space-y-6">
+      {/* Tiêu đề */}
       <div>
         <h1 className="text-2xl font-bold">Cài đặt</h1>
         <p className="text-gray-500 dark:text-gray-300">
@@ -31,6 +32,7 @@ const Settings = () => {
         </p>
       </div>
 
+      {/* Giao diện */}
       <Card>
         <CardContent className="space-y-4 p-6">
           <div>
@@ -40,7 +42,6 @@ const Settings = () => {
             </p>
           </div>
 
-          {/* DARK / LIGHT */}
           <div className="flex items-center justify-between">
             <div>
               <Label className="font-medium">Chế độ tối/sáng</Label>
@@ -48,7 +49,6 @@ const Settings = () => {
                 Chuyển đổi giữa giao diện tối và sáng
               </p>
             </div>
-
             <Switch
               checked={theme === "dark"}
               onCheckedChange={(checked) => {
@@ -57,7 +57,6 @@ const Settings = () => {
             />
           </div>
 
-          {/* SYSTEM THEME */}
           <div className="flex items-center justify-between">
             <div>
               <Label className="font-medium">Tự động theo hệ thống</Label>
@@ -65,7 +64,6 @@ const Settings = () => {
                 Theo cài đặt hệ điều hành
               </p>
             </div>
-
             <Checkbox
               checked={theme === "system"}
               onCheckedChange={(checked) => {
@@ -76,6 +74,7 @@ const Settings = () => {
         </CardContent>
       </Card>
 
+      {/* Thông báo */}
       <Card>
         <CardContent className="space-y-4 p-6">
           <div>
@@ -118,6 +117,7 @@ const Settings = () => {
         </CardContent>
       </Card>
 
+      {/* Nội dung */}
       <Card>
         <CardContent className="space-y-4 p-6">
           <div>
@@ -155,6 +155,7 @@ const Settings = () => {
         </CardContent>
       </Card>
 
+      {/* Bảo mật */}
       <Card>
         <CardContent className="space-y-4 p-6">
           <div>

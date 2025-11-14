@@ -47,74 +47,78 @@ export default function ContentForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 text-foreground">
-      <h1 className="text-xl font-semibold">
-        {isEditing ? "Chỉnh sửa tài liệu" : "Tạo tài liệu mới"}
-      </h1>
+    <div className="max-w-screen-md mx-auto px-4 py-6">
+      <form onSubmit={handleSubmit} className="space-y-6 text-foreground">
+        <h1 className="text-3xl font-bold">
+          {isEditing ? "Chỉnh sửa tài liệu" : "Tạo tài liệu mới"}
+        </h1>
 
-      <div className="space-y-4">
-        <div>
-          <Label>Tiêu đề tài liệu</Label>
-          <Input
-            placeholder="Nhập tiêu đề tài liệu"
-            value={formData.title}
-            onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
-            }
-          />
-        </div>
-        <div>
-          <Label>Mô tả</Label>
-          <Textarea
-            placeholder="Nhập mô tả tài liệu"
-            value={formData.description}
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
-          />
-        </div>
-        <div>
-          <Label>Danh mục</Label>
-          <Select
-            value={formData.category}
-            onValueChange={(val) =>
-              setFormData({ ...formData, category: val })
-            }
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Chọn danh mục" />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map((cat) => (
-                <SelectItem key={cat.value} value={cat.label}>
-                  {cat.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {!isEditing && (
+        <div className="space-y-4">
           <div>
-            <Label>Tệp tài liệu</Label>
-            <label
-              htmlFor="file"
-              className="block w-full p-6 text-center border border-dashed rounded-lg cursor-pointer 
-                         bg-background text-foreground hover:bg-muted transition"
-            >
-              <p>Kéo thả tệp hoặc nhấn để chọn</p>
-              <input id="file" type="file" className="hidden" />
-            </label>
+            <Label>Tiêu đề tài liệu</Label>
+            <Input
+              placeholder="Nhập tiêu đề tài liệu"
+              value={formData.title}
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
+            />
           </div>
-        )}
-      </div>
+          <div>
+            <Label>Mô tả</Label>
+            <Textarea
+              placeholder="Nhập mô tả tài liệu"
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <Label>Danh mục</Label>
+            <Select
+              value={formData.category}
+              onValueChange={(val) =>
+                setFormData({ ...formData, category: val })
+              }
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Chọn danh mục" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((cat) => (
+                  <SelectItem key={cat.value} value={cat.label}>
+                    {cat.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
-      <div className="flex justify-end gap-2">
-        <Button variant="outline" type="button" onClick={onCancel}>
-          Hủy
-        </Button>
-        <Button type="submit">{isEditing ? "Cập nhật" : "Tạo mới"}</Button>
-      </div>
-    </form>
+          {!isEditing && (
+            <div>
+              <Label>Tệp tài liệu</Label>
+              <label
+                htmlFor="file"
+                className="block w-full p-6 text-center border border-dashed rounded-lg cursor-pointer 
+                           bg-background text-foreground hover:bg-muted transition"
+              >
+                <p>Kéo thả tệp hoặc nhấn để chọn</p>
+                <input id="file" type="file" className="hidden" />
+              </label>
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-end gap-2">
+          <Button variant="outline" type="button" onClick={onCancel}>
+            Hủy
+          </Button>
+          <Button type="submit">
+            {isEditing ? "Cập nhật" : "Tạo mới"}
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }
