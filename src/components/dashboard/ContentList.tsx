@@ -19,36 +19,42 @@ import { List, LayoutGrid } from "lucide-react";
 const mockContents: Content[] = [
   {
     id: "1",
-    title: "Giáo trình Lập trình Web",
-    description: "Tài liệu toàn diện về phát triển web hiện đại",
+    title: "System & Network Administration Scripting & Shell",
+    description: "Khái niệm cơ bản về shell, hướng dẫn lập trình sh scripting",
     type: "PDF",
     category: "Lập trình",
     createdAt: "2025-11-01",
     downloads: 234,
     size: "16.63MB",
     uploaderRole: "admin",
+    fileType: "pdf",
+    fileUrl: "/mock_data/SNA_Scripting.pdf"
   },
   {
     id: "2",
-    title: "Bài giảng JavaScript nâng cao",
-    description: "Các khái niệm nâng cao trong JavaScript ES6+",
+    title: "Bài thực hành Lab 4 - Shell Script",
+    description: "Các thao tác cơ bản, và câu lệnh điều kiện trong Shell Script (bash).",
     type: "DOCX",
     category: "Lập trình",
     createdAt: "2025-10-28",
     downloads: 189,
     size: "12.45MB",
     uploaderRole: "user",
+    fileType: "docx",
+    fileUrl: "/mock_data/Lab4_SNA.pdf"
   },
   {
     id: "3",
-    title: "React Hooks Tutorial",
-    description: "Hướng dẫn chi tiết sử dụng React Hooks",
-    type: "PDF",
+    title: "Chương 5: Network Layer Control Plane",
+    description: "Thuật toán định tuyến (Link State, Distance Vector) , các giao thức (OSPF, BGP)",
+    type: "PPTX",
     category: "Frontend",
     createdAt: "2025-10-25",
     downloads: 456,
     size: "18.21MB",
     uploaderRole: "admin",
+    fileType: "pptx",
+    fileUrl: "/mock_data/Chapter_5_v8.0.pdf"
   },
   {
     id: "4",
@@ -117,6 +123,32 @@ const mockContents: Content[] = [
     size: "11.77MB",
     uploaderRole: "user",
   },
+  {
+  id: "10",
+  title: "Video Visual",
+  description: "Demo video preview",
+  type: "MP4",
+  category: "Frontend",
+  createdAt: "2025-11-18",
+  downloads: 100,
+  size: "3.21 MB",
+  uploaderRole: "admin",
+  fileType: "video",
+  fileUrl: "/mock_data/visualizer.mp4"
+  },
+  {
+  id: "11",
+  title: "Ảnh Visual",
+  description: "Demo image preview",
+  type: "JPG",
+  category: "Design",
+  createdAt: "2025-11-18",
+  downloads: 58,
+  size: "42.3 KB",
+  uploaderRole: "user",
+  fileType: "image",
+  fileUrl: "/mock_data/background.jpg"
+  },
 ];
 
 function getTypeColor(type: string) {
@@ -127,6 +159,10 @@ function getTypeColor(type: string) {
       return "bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-300";
     case "ZIP":
       return "bg-yellow-500/10 text-yellow-700 dark:bg-yellow-500/20 dark:text-yellow-300";
+    case "MP4":
+      return "bg-purple-500/10 text-purple-600 dark:bg-purple-500/20 dark:text-purple-300";
+    case "JPG":
+      return "bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-300";  
     default:
       return "bg-gray-500/10 text-gray-700 dark:bg-gray-500/20 dark:text-gray-300";
   }
@@ -180,6 +216,8 @@ export default function ContentList({
               <SelectItem value="PDF">PDF</SelectItem>
               <SelectItem value="DOCX">DOCX</SelectItem>
               <SelectItem value="ZIP">ZIP</SelectItem>
+              <SelectItem value="MP4">MP4</SelectItem>
+              <SelectItem value="JPG">JPG</SelectItem>
             </SelectContent>
           </Select>
 

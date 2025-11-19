@@ -1,32 +1,55 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
-import Avatar from "@/components/ui/avatar";
 import logoImage from "@/assets/logo.png";
 import UserDropdown from "@/components/ui/UserDropdown";
 
-export default function Navbar({ isLoggedIn = false }: { isLoggedIn?: boolean }) {
-  const { user } = useAuth();
+export default function Navbar() {
 
-  return (
-    <header className="flex items-center justify-between px-6 py-4 border-b bg-background">
-      <Link to="/">
-        <img src={logoImage} alt="DayVaHoc Logo" className="h-8 w-auto" />
-      </Link>
+  const { user } = useAuth();
+  const isLoggedIn = !!user;
 
-      {isLoggedIn ? (
-        <div className="flex items-center space-x-4">
-          <nav className="hidden md:flex items-center space-x-4 text-sm font-medium">
-            <Link to="/dashboard" className="hover:underline">Tổng Quan</Link>
-            <Link to="/content" className="hover:underline">Tài Liệu</Link>
-          </nav>
-          <UserDropdown />
-        </div>
-      ) : (
-        <Button asChild variant="outline" size="sm">
-          <Link to="/login">Đăng nhập</Link>
-        </Button>
-      )}
-    </header>
-  );
+  return (
+    <header className="border-b bg-background sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <Link to="/">
+          <img src={logoImage} alt="DayVaHoc Logo" className="h-8 w-auto" />
+        </Link>
+
+        {isLoggedIn ? (
+          <div className="flex items-center space-x-4">
+            <nav className="hidden md:flex items-center space-x-4 text-sm font-medium">
+              <NavLink 
+                to="/dashboard" 
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }
+              >
+                Tổng Quan
+              </NavLink>
+
+              <NavLink 
+                to="/content" 
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-foreground" 
+                    : "text-muted-foreground hover:text-foreground"
+                }
+              >
+                Tài Liệu
+              </NavLink>
+
+            </nav>
+            <UserDropdown />
+          </div>
+        ) : (
+          <Button asChild variant="outline" size="sm">
+             <Link to="/login">Đăng nhập</Link>
+          </Button>
+        )}
+      </div> 
+    </header>
+ );
 }

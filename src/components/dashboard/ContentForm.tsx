@@ -47,70 +47,91 @@ export default function ContentForm({
   };
 
   return (
-    <div className="max-w-screen-md mx-auto px-4 py-6">
+    <div className="max-w-2xl mx-auto px-4 md:px-6 py-10">
       <form onSubmit={handleSubmit} className="space-y-6 text-foreground">
-        <h1 className="text-3xl font-bold">
-          {isEditing ? "Chỉnh sửa tài liệu" : "Tạo tài liệu mới"}
+        <h1 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">
+        {isEditing ? "Chỉnh sửa tài liệu" : "Tạo tài liệu mới"}
         </h1>
 
-        <div className="space-y-4">
+        <div className="space-y-8">
+          {/* Tiêu đề */}
           <div>
-            <Label>Tiêu đề tài liệu</Label>
+            <Label htmlFor="title" className="text-base font-medium text-foreground mb-3 block">
+              Tiêu đề tài liệu
+            </Label>
             <Input
+              id="title"
               placeholder="Nhập tiêu đề tài liệu"
               value={formData.title}
               onChange={(e) =>
                 setFormData({ ...formData, title: e.target.value })
               }
+              className="text-base"
             />
           </div>
+
+          {/* Mô tả */}
           <div>
-            <Label>Mô tả</Label>
+            <Label htmlFor="description" className="text-base font-medium text-foreground mb-3 block">
+              Mô tả
+            </Label>
             <Textarea
+              id="description"
               placeholder="Nhập mô tả tài liệu"
               value={formData.description}
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
+              className="text-base"
             />
           </div>
-          <div>
-            <Label>Danh mục</Label>
-            <Select
-              value={formData.category}
-              onValueChange={(val) =>
-                setFormData({ ...formData, category: val })
-              }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Chọn danh mục" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat.value} value={cat.label}>
-                    {cat.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
 
+{/* Danh mục */}
+          <div>
+            <Label htmlFor="category" className="text-base font-medium text-foreground mb-3 block">
+              Danh mục
+            </Label>
+            <Select
+              value={formData.category}
+              onValueChange={(val) =>
+                setFormData({ ...formData, category: val })
+              }
+            >
+              <SelectTrigger id="category" className="text-base">
+                <SelectValue placeholder="Chọn danh mục" />
+              </SelectTrigger>
+              <SelectContent 
+                className="z-50 w-[var(--radix-select-trigger-width)] max-h-[150px] overflow-y-auto" /* <-- THÊM 2 CLASS NÀY */
+                position="popper" 
+              >
+                {categories.map((cat) => (
+                  <SelectItem key={cat.value} value={cat.label}>
+                    {cat.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          {/* Upload file */}
           {!isEditing && (
             <div>
-              <Label>Tệp tài liệu</Label>
+              <Label htmlFor="file" className="text-base font-medium text-foreground mb-3 block">
+                Tệp tài liệu
+              </Label>
               <label
                 htmlFor="file"
                 className="block w-full p-6 text-center border border-dashed rounded-lg cursor-pointer 
                            bg-background text-foreground hover:bg-muted transition"
               >
-                <p>Kéo thả tệp hoặc nhấn để chọn</p>
+                <p className="text-base">Kéo thả tệp hoặc nhấn để chọn</p>
                 <input id="file" type="file" className="hidden" />
               </label>
             </div>
           )}
         </div>
 
-        <div className="flex justify-end gap-2">
+        {/* Action buttons */}
+        <div className="flex justify-end gap-3 pt-6">
           <Button variant="outline" type="button" onClick={onCancel}>
             Hủy
           </Button>

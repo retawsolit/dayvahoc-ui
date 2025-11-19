@@ -18,49 +18,51 @@ export default function ContentPage() {
     setShowForm(false);
   };
 
-  return (
-    <MainLayout>
-      {/* Header section */}
-      <div className="bg-background py-6">
-        <div className="max-w-screen-xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+return (
+  <MainLayout>
+    {/* Header section */}
+    <div className="bg-background py-6">
+      <div className="max-w-screen-xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+        {!showForm && (
           <h1 className="text-3xl font-bold">Tài liệu</h1>
+        )}
 
-          {!showForm && (
-            <Button
-              onClick={() => setShowForm(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
-            >
-              Tạo mới
-            </Button>
-          )}
-        </div>
-      </div>
-
-      {/* Nội dung chính */}
-      <div className="max-w-screen-xl mx-auto px-4 py-6">
-        {showForm ? (
-          <ContentForm
-            content={
-              editingId
-                ? {
-                    id: editingId,
-                    title: "Mock",
-                    description: "",
-                    type: "PDF",
-                    category: "Test",
-                    createdAt: "",
-                    downloads: 0,
-                    size: "1.2MB",            
-                    uploaderRole: "admin",    
-                  }
-                : undefined
-            }
-            onCancel={handleCancel}
-          />
-        ) : (
-          <ContentList onEdit={handleEdit} />
+        {!showForm && (
+          <Button
+            onClick={() => setShowForm(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
+          >
+            Tạo mới
+          </Button>
         )}
       </div>
-    </MainLayout>
-  );
+    </div>
+
+    {/* Nội dung chính */}
+    <div className="max-w-screen-xl mx-auto px-4 py-6">
+      {showForm ? (
+        <ContentForm
+          content={
+            editingId
+              ? {
+                  id: editingId,
+                  title: "Mock",
+                  description: "",
+                  type: "PDF",
+                  category: "Test",
+                  createdAt: "",
+                  downloads: 0,
+                  size: "1.2MB",            
+                  uploaderRole: "admin",    
+                }
+              : undefined
+          }
+          onCancel={handleCancel}
+        />
+      ) : (
+        <ContentList onEdit={handleEdit} />
+      )}
+    </div>
+  </MainLayout>
+);
 }

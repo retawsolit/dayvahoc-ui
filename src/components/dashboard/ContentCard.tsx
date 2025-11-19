@@ -2,6 +2,7 @@ import { type Content } from "@/types/content";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
+import PreviewModal from "./PreviewModal";
 
 export default function ContentCard({
   item,
@@ -13,6 +14,7 @@ export default function ContentCard({
   onDelete: (id: string) => void;
 }) {
   const [hovered, setHovered] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   const getFileIcon = (type: string) => {
     switch (type) {
@@ -22,20 +24,41 @@ export default function ContentCard({
         return "📘";
       case "ZIP":
         return "📙";
+        case "PPTX":
+        return "📒";
+      case "MP4":
+        return "🎬";
+      case "JPG":
+        return "🖼️";
       default:
         return "📄";
     }
   };
 
+  const getFileTypeFromUrlOrType = (
+    type: string,
+    url: string
+  ): "image" | "video" | "pdf" | "docx" | "unknown" => {
+    const lowerType = type.toLowerCase();
+    const ext = url.split(".").pop()?.toLowerCase();
+
+    const lookup = ext || lowerType;
+
+    if (["jpg", "jpeg", "png", "gif", "webp"].includes(lookup)) return "image";
+    if (["mp4", "mov", "webm"].includes(lookup)) return "video";
+    if (["pdf"].includes(lookup)) return "pdf";
+    if (["doc", "docx"].includes(lookup)) return "docx";
+    return "unknown";
+  };
+
   return (
-        <Card
-  onMouseEnter={() => setHovered(true)}
-  onMouseLeave={() => setHovered(false)}
-  className={`relative p-4 bg-background shadow-md border rounded-xl transition-all duration-300 ease-in-out overflow-hidden ${
-  hovered ? "min-h-[270px]" : "min-h-[170px]"
-}`}
->   
-      {/* --- Non-Hover View --- */}
+    <Card
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`relative p-4 bg-background shadow-md border rounded-xl transition-all duration-300 ease-in-out overflow-hidden ${
+        hovered ? "min-h-[270px]" : "min-h-[170px]"
+      }`}
+    >
       {!hovered ? (
         <>
           <div className="text-lg font-semibold truncate">
@@ -50,6 +73,15 @@ export default function ContentCard({
           </div>
 
           <div className="flex justify-end items-center gap-2 mt-3">
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => setShowPreview(true)}
+              className="border border-blue-500 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900"
+            >
+              👁️ Xem trước
+            </Button>
+
             <Button
               size="sm"
               variant="ghost"
@@ -69,7 +101,6 @@ export default function ContentCard({
           </div>
         </>
       ) : (
-        /* --- Hover View --- */
         <>
           <div className="text-sm space-y-1">
             <p className="font-semibold text-base">
@@ -90,6 +121,14 @@ export default function ContentCard({
             <Button
               size="sm"
               variant="ghost"
+              onClick={() => setShowPreview(true)}
+              className="border border-blue-500 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900"
+            >
+              👁️ Xem trước
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
               onClick={() => onEdit(item.id)}
               className="text-blue-600"
             >
@@ -105,6 +144,17 @@ export default function ContentCard({
             </Button>
           </div>
         </>
+      )}
+
+      {/* Modal xem trước */}
+      {showPreview && (
+        <PreviewModal
+          open={showPreview}
+          title={item.title}
+          fileUrl={item.fileUrl || ""}
+          fileType={getFileTypeFromUrlOrType(item.type, item.fileUrl || "")}
+          onClose={() => setShowPreview(false)}
+        />
       )}
     </Card>
   );
