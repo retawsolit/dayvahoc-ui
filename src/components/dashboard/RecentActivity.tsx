@@ -9,7 +9,7 @@ const activities = [
 
 const RecentActivity = () => {
   return (
-    <Card className="shadow-md bg-background text-foreground">
+    <Card className="shadow-sm bg-white dark:bg-zinc-800 border-border dark:border-zinc-700">
       <CardContent className="p-4">
         <h2 className="font-semibold text-lg mb-2">Hoạt động gần đây</h2>
         <ul className="space-y-3">

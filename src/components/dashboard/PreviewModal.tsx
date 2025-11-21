@@ -57,12 +57,15 @@ export default function PreviewModal({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-800 dark:border-zinc-700 border-border">
         <DialogHeader>
-          <DialogTitle>Xem trước: {title || "Tài liệu"}</DialogTitle>
+          <DialogTitle className="text-foreground text-xl">
+            Xem trước: {title || "Tài liệu"}</DialogTitle>
         </DialogHeader>
 
-        <div className="mt-4">{renderPreview()}</div>
+        <div className="mt-4 flex justify-center">
+          {renderPreview()}
+          </div>
       </DialogContent>
     </Dialog>
   );

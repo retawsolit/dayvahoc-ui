@@ -246,28 +246,28 @@ export default function ContentList({
         Tìm thấy {filteredContents.length} tài liệu
       </p>
 
-      {/* LIST VIEW */}
-      {viewMode === "list" ? (
-        <Card className="overflow-x-auto bg-background text-foreground shadow-md rounded-xl">
-          <table className="w-full text-[15px]">
-            <thead>
-              <tr className="border-b text-left bg-muted/20">
-                <th className="px-6 py-4">Tiêu đề</th>
-                <th className="px-6 py-4">Dung lượng</th>
-                <th className="px-6 py-4">Người đăng</th>
-                <th className="px-6 py-4">Loại</th>
-                <th className="px-6 py-4">Danh mục</th>
-                <th className="px-6 py-4">Ngày tạo</th>
-                <th className="px-6 py-4">Lượt tải</th>
-                <th className="px-6 py-4 text-right">Hành động</th>
-              </tr>
-            </thead>
+    {/* LIST VIEW */}
+    {viewMode === "list" ? (
+      <Card className="overflow-x-auto bg-white dark:bg-zinc-800 text-foreground shadow-md rounded-xl">
+        <table className="w-full text-[15px]">
+          <thead>
+            <tr className="border-b text-left bg-zinc-100 dark:bg-zinc-700/40">
+              <th className="px-6 py-4">Tiêu đề</th>
+              <th className="px-6 py-4">Dung lượng</th>
+              <th className="px-6 py-4">Người đăng</th>
+              <th className="px-6 py-4">Loại</th>
+              <th className="px-6 py-4">Danh mục</th>
+              <th className="px-6 py-4">Ngày tạo</th>
+              <th className="px-6 py-4">Lượt tải</th>
+              <th className="px-6 py-4 text-right">Hành động</th>
+            </tr>
+          </thead>
 
-            <tbody>
+          <tbody>
             {filteredContents.map((item) => (
               <tr
                 key={item.id}
-                className="border-b hover:bg-muted/50 transition-colors"
+                className="border-b hover:bg-zinc-700/30 transition-colors"
               >
                 {/* Tiêu đề + mô tả */}
                 <td className="px-6 py-4 font-medium">
@@ -279,7 +279,9 @@ export default function ContentList({
 
                 {/* Dung lượng */}
                 <td className="px-6 py-4">
-                  {item.size || <span className="text-muted-foreground text-sm">?</span>}
+                  {item.size || (
+                    <span className="text-muted-foreground text-sm">?</span>
+                  )}
                 </td>
 
                 {/* Người đăng */}
@@ -287,7 +289,7 @@ export default function ContentList({
                   {item.uploaderRole === "admin" ? (
                     <span className="text-red-600 font-medium">Admin</span>
                   ) : (
-                    <span className="text-gray-700 dark:text-gray-300">User</span>
+                    <span className="text-gray-300">User</span>
                   )}
                 </td>
 
@@ -307,14 +309,9 @@ export default function ContentList({
 
                 {/* Hành động */}
                 <td className="px-6 py-4 text-right space-x-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => onEdit(item.id)}
-                  >
+                  <Button variant="ghost" size="sm" onClick={() => onEdit(item.id)}>
                     Sửa
                   </Button>
-
                   <Button
                     variant="ghost"
                     size="sm"
@@ -338,21 +335,21 @@ export default function ContentList({
               </tr>
             )}
           </tbody>
-          </table>
-        </Card>
-      ) : (
-    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {filteredContents.map((item) => (
-        <ContentCard
-          key={item.id}
-          item={item}
-          onEdit={onEdit}
-          onDelete={handleDelete}
-        />
-      ))}
-    </div>
-  
-          )}
+        </table>
+      </Card>
+    ) : (
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {filteredContents.map((item) => (
+          <ContentCard
+            key={item.id}
+            item={item}
+            onEdit={onEdit}
+            onDelete={handleDelete}
+          />
+        ))}
+      </div>
+    )}
+
         </div>
   );
 }

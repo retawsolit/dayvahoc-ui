@@ -33,11 +33,11 @@ const StatCards = () => {
       {stats.map((stat) => (
         <Card
           key={stat.title}
-          className="shadow-md bg-background text-foreground border border-border"
+          className="shadow-sm bg-white dark:bg-zinc-800 border-border dark:border-zinc-700"
         >
           <CardContent className="p-6 min-h-[120px] flex flex-col justify-between">
             <div className="flex justify-between items-start">
-              <p className="text-sm font-medium text-muted-foreground">
+              <p className="text-sm font-medium text-muted-foreground dark:text-zinc-400">
                 {stat.title}
               </p>
               <span className="text-2xl">{stat.icon}</span>
