@@ -20,7 +20,7 @@ const data = [
 
 const DownloadLineChart = () => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4">
+    <div className="bg-white rounded-lg shadow-md p-4 text-black">
       <h2 className="font-semibold text-lg mb-2">
         Xu hướng lượt tải 6 tháng qua
       </h2>

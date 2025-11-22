@@ -47,16 +47,22 @@ export default function ContentForm({
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 md:px-6 py-10">
-      <form onSubmit={handleSubmit} className="space-y-6 text-foreground">
-        <h1 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">
+    <div className="max-w-3xl mx-auto px-4 md:px-6 py-10">
+      <h1 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-8">
         {isEditing ? "Chỉnh sửa tài liệu" : "Tạo tài liệu mới"}
-        </h1>
+      </h1>
 
-        <div className="space-y-8">
+      {/* ===== BẢNG GÓP (GIỐNG PROFILE CARD) ===== */}
+      <div
+    className="rounded-xl border border-zinc-200 dark:border-zinc-700 
+               bg-background shadow-sm p-8 transition-colors duration-300">
+        <form onSubmit={handleSubmit} className="space-y-8 text-foreground">
           {/* Tiêu đề */}
           <div>
-            <Label htmlFor="title" className="text-base font-medium text-foreground mb-3 block">
+            <Label
+              htmlFor="title"
+              className="text-base font-medium text-foreground mb-3 block"
+            >
               Tiêu đề tài liệu
             </Label>
             <Input
@@ -72,7 +78,10 @@ export default function ContentForm({
 
           {/* Mô tả */}
           <div>
-            <Label htmlFor="description" className="text-base font-medium text-foreground mb-3 block">
+            <Label
+              htmlFor="description"
+              className="text-base font-medium text-foreground mb-3 block"
+            >
               Mô tả
             </Label>
             <Textarea
@@ -82,40 +91,47 @@ export default function ContentForm({
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className="text-base"
+              className="text-base min-h-[120px]"
             />
           </div>
 
-{/* Danh mục */}
-          <div>
-            <Label htmlFor="category" className="text-base font-medium text-foreground mb-3 block">
-              Danh mục
-            </Label>
-            <Select
-              value={formData.category}
-              onValueChange={(val) =>
-                setFormData({ ...formData, category: val })
-              }
-            >
-              <SelectTrigger id="category" className="text-base">
-                <SelectValue placeholder="Chọn danh mục" />
-              </SelectTrigger>
-              <SelectContent 
-                className="z-50 w-[var(--radix-select-trigger-width)] max-h-[150px] overflow-y-auto" /* <-- THÊM 2 CLASS NÀY */
-                position="popper" 
-              >
-                {categories.map((cat) => (
-                  <SelectItem key={cat.value} value={cat.label}>
-                    {cat.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          {/* Danh mục */}
+          <div>
+            <Label
+              htmlFor="category"
+              className="text-base font-medium text-foreground mb-3 block"
+            >
+              Danh mục
+            </Label>
+            <Select
+              value={formData.category}
+              onValueChange={(val) =>
+                setFormData({ ...formData, category: val })
+              }
+            >
+              <SelectTrigger id="category" className="text-base">
+                <SelectValue placeholder="Chọn danh mục" />
+              </SelectTrigger>
+              <SelectContent
+                className="z-50 w-[var(--radix-select-trigger-width)] max-h-[150px] overflow-y-auto"
+                position="popper"
+              >
+                {categories.map((cat) => (
+                  <SelectItem key={cat.value} value={cat.label}>
+                    {cat.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
           {/* Upload file */}
           {!isEditing && (
             <div>
-              <Label htmlFor="file" className="text-base font-medium text-foreground mb-3 block">
+              <Label
+                htmlFor="file"
+                className="text-base font-medium text-foreground mb-3 block"
+              >
                 Tệp tài liệu
               </Label>
               <label
@@ -128,18 +144,18 @@ export default function ContentForm({
               </label>
             </div>
           )}
-        </div>
 
-        {/* Action buttons */}
-        <div className="flex justify-end gap-3 pt-6">
-          <Button variant="outline" type="button" onClick={onCancel}>
-            Hủy
-          </Button>
-          <Button type="submit">
-            {isEditing ? "Cập nhật" : "Tạo mới"}
-          </Button>
-        </div>
-      </form>
+          {/* Action buttons */}
+          <div className="flex justify-end gap-3 pt-6 border-t border-zinc-200 dark:border-zinc-700">
+            <Button variant="outline" type="button" onClick={onCancel}>
+              Hủy
+            </Button>
+            <Button type="submit">
+              {isEditing ? "Cập nhật" : "Tạo mới"}
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

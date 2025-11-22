@@ -22,7 +22,7 @@ const data = [
 
 const DocumentBarChart = () => {
 return (
-<div className="bg-white rounded-lg shadow-md p-4">
+<div className="bg-white rounded-lg shadow-md p-4 text-black">
 <h2 className="font-semibold text-lg mb-2">Số lượng tài liệu 6 tháng qua</h2>
 <ResponsiveContainer width="100%" height={300}>
 <BarChart data={data}>
