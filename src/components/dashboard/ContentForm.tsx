@@ -52,7 +52,6 @@ export default function ContentForm({
         {isEditing ? "Chỉnh sửa tài liệu" : "Tạo tài liệu mới"}
       </h1>
 
-      {/* ===== BẢNG GÓP (GIỐNG PROFILE CARD) ===== */}
       <div
     className="rounded-xl border border-zinc-200 dark:border-zinc-700 
                bg-background shadow-sm p-8 transition-colors duration-300">

@@ -18,51 +18,47 @@ export default function ContentPage() {
     setShowForm(false);
   };
 
-return (
-  <MainLayout>
-    {/* Header section */}
-    <div className="bg-background py-6">
-      <div className="max-w-screen-xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-        {!showForm && (
-          <h1 className="text-3xl font-bold">Tài liệu</h1>
-        )}
+  return (
+    <MainLayout>
+      {!showForm && (
+        <div className="bg-background py-6">
+          <div className="max-w-screen-xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <h1 className="text-3xl font-bold">Tài liệu</h1>
+            
+            <Button
+              onClick={() => setShowForm(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
+            >
+              Tạo mới
+            </Button>
+          </div>
+        </div>
+      )}
 
-        {!showForm && (
-          <Button
-            onClick={() => setShowForm(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
-          >
-            Tạo mới
-          </Button>
+      <div>
+        {showForm ? (
+          <ContentForm
+            content={
+              editingId
+                ? {
+                    id: editingId,
+                    title: "Mock Document",
+                    description: "Mô tả mẫu...",
+                    type: "PDF",
+                    category: "Lập trình",
+                    createdAt: "2025-01-01",
+                    downloads: 10,
+                    size: "1.2MB",
+                    uploaderRole: "admin",
+                  }
+                : undefined
+            }
+            onCancel={handleCancel}
+          />
+        ) : (
+          <ContentList onEdit={handleEdit} />
         )}
       </div>
-    </div>
-
-    {/* Nội dung chính */}
-    <div className="max-w-screen-xl mx-auto px-4 py-6">
-      {showForm ? (
-        <ContentForm
-          content={
-            editingId
-              ? {
-                  id: editingId,
-                  title: "Mock",
-                  description: "",
-                  type: "PDF",
-                  category: "Test",
-                  createdAt: "",
-                  downloads: 0,
-                  size: "1.2MB",            
-                  uploaderRole: "admin",    
-                }
-              : undefined
-          }
-          onCancel={handleCancel}
-        />
-      ) : (
-        <ContentList onEdit={handleEdit} />
-      )}
-    </div>
-  </MainLayout>
-);
+    </MainLayout>
+  );
 }

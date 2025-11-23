@@ -16,7 +16,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/">
-          <img src={logoImage} alt="DayVaHoc Logo" className="h-8 w-auto" />
+          <img src={logoImage} alt="DayVaHoc Logo" className="h-12 w-auto" />
         </Link>
 
         {isLoggedIn ? (
