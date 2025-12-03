@@ -5,47 +5,48 @@ const stats = [
     title: "Tài liệu",
     value: "245",
     icon: "📁",
-    valueColor: "text-blue-700 dark:text-blue-400",
+    color: "bg-red-100 text-red-700 dark:bg-red-450/20 dark:text-red-400",
   },
   {
     title: "Người dùng",
     value: "1.2K",
     icon: "👥",
-    valueColor: "text-purple-700 dark:text-purple-400",
+    color: "bg-purple-100 text-purple-700 dark:bg-purple-450/20 dark:text-purple-400",
   },
   {
     title: "Lượt tải",
     value: "8.3K",
     icon: "⬇️",
-    valueColor: "text-emerald-700 dark:text-emerald-400",
+    color: "bg-emerald-100 text-emerald-700 dark:bg-emerald-450/20 dark:text-emerald-400",
   },
   {
     title: "Dung lượng",
     value: "2.5GB",
     icon: "💾",
-    valueColor: "text-indigo-700 dark:text-indigo-400",
+    color: "bg-cyan-100 text-cyan-700 dark:bg-cyan-450/20 dark:text-cyan-400",
   },
 ];
 
 const StatCards = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat) => (
         <Card
           key={stat.title}
-          className="shadow-sm bg-white dark:bg-zinc-800 border-border dark:border-zinc-700"
+          className="shadow-sm rounded-xl transition-all duration-200 hover:shadow-md bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700"
         >
-          <CardContent className="p-6 min-h-[120px] flex flex-col justify-between">
-            <div className="flex justify-between items-start">
-              <p className="text-sm font-medium text-muted-foreground dark:text-zinc-400">
-                {stat.title}
-              </p>
-              <span className="text-2xl">{stat.icon}</span>
+          <CardContent className="p-4 sm:p-5 md:p-6">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-sm text-muted-foreground dark:text-zinc-400">{stat.title}</p>
+                <p className={`text-2xl font-bold mt-1 ${stat.color.split(" ")[1]}`}>
+                  {stat.value}
+                </p>
+              </div>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${stat.color}`}>
+                <span className="text-xl">{stat.icon}</span>
+              </div>
             </div>
-
-            <p className={`text-3xl font-bold mt-4 ${stat.valueColor}`}>
-              {stat.value}
-            </p>
           </CardContent>
         </Card>
       ))}

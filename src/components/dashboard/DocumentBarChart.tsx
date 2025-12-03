@@ -1,42 +1,47 @@
 import {
-BarChart,
-Bar,
-XAxis,
-YAxis,
-CartesianGrid,
-Tooltip,
-Legend,
-ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
 } from "recharts";
 
-
 const data = [
-{ month: "T1", documents: 52, uploads: 40 },
-{ month: "T2", documents: 61, uploads: 49 },
-{ month: "T3", documents: 68, uploads: 53 },
-{ month: "T4", documents: 80, uploads: 65 },
-{ month: "T5", documents: 72, uploads: 58 },
-{ month: "T6", documents: 90, uploads: 75 },
+  { month: "T1", documents: 52, uploads: 40 },
+  { month: "T2", documents: 61, uploads: 49 },
+  { month: "T3", documents: 68, uploads: 53 },
+  { month: "T4", documents: 80, uploads: 65 },
+  { month: "T5", documents: 72, uploads: 58 },
+  { month: "T6", documents: 90, uploads: 75 },
 ];
 
-
 const DocumentBarChart = () => {
-return (
-<div className="bg-white rounded-lg shadow-md p-4 text-black">
-<h2 className="font-semibold text-lg mb-2">Số lượng tài liệu 6 tháng qua</h2>
-<ResponsiveContainer width="100%" height={300}>
-<BarChart data={data}>
-<CartesianGrid strokeDasharray="3 3" />
-<XAxis dataKey="month" />
-<YAxis />
-<Tooltip />
-<Legend />
-<Bar dataKey="documents" fill="#1f2937" name="Tài liệu" />     
-<Bar dataKey="uploads" fill="#6b7280" name="Tải lên" />  
-</BarChart>
-</ResponsiveContainer>
-</div>
-);
+  return (
+    <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+      <h2 className="font-semibold text-lg sm:text-xl text-gray-900 mb-4">
+        Số lượng tài liệu 6 tháng qua
+      </h2>
+
+      <div className="w-full overflow-x-auto">
+        <div className="min-w-[360px] sm:min-w-full h-[260px] sm:h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="documents" fill="#1f2937" name="Tài liệu" />
+              <Bar dataKey="uploads" fill="#6b7280" name="Tải lên" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default DocumentBarChart;

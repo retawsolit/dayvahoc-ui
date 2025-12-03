@@ -210,10 +210,12 @@ export default function ContentList({
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-6 space-y-6 text-foreground">
       {/* Header + filter + toggle */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <h1 className="text-3xl font-bold">Quản lý nội dung</h1>
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <h1 className="text-3xl font-bold text-center lg:text-left">
+          Quản lý nội dung
+        </h1>
 
-        <div className="flex flex-col sm:flex-row gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
           <Input
             placeholder="Tìm kiếm tài liệu..."
             value={searchTerm}
@@ -221,9 +223,10 @@ export default function ContentList({
               setSearchTerm(e.target.value);
               setCurrentPage(1);
             }}
-            className="sm:w-64 rounded-lg border px-4 py-2 text-sm bg-background text-foreground"
+            className="w-full sm:w-64 sm:flex-1 lg:flex-none rounded-lg border px-4 py-2 text-sm bg-background text-foreground"
+            
           />
-
+        <div className="flex gap-2 sm:flex-1 lg:flex-none"></div>
           <Select
             value={filterType}
             onValueChange={(v) => {
@@ -231,7 +234,7 @@ export default function ContentList({
               setCurrentPage(1);
             }}
           >
-            <SelectTrigger className="sm:w-40 bg-background text-foreground border">
+            <SelectTrigger className="w-full sm:w-40 bg-background text-foreground border">
               <SelectValue placeholder="Tất cả loại" />
             </SelectTrigger>
             <SelectContent>

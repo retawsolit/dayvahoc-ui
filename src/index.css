@@ -45,9 +45,18 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    font-size: 17px;
-    @media (min-width: 1024px) {
-      font-size: 18px;
+    font-size: 15px; /* Mobile: 15px */
+
+    @media (min-width: 768px) {
+      font-size: 16px; /* Tablet: 16px (Chuẩn) */
+    }
+
+    @media (min-width: 1280px) {
+      font-size: 17px; /* Laptop: 17px (To rõ) */
+    }
+    
+    @media (min-width: 1536px) {
+      font-size: 18px; /* Màn hình rất lớn: 18px */
     }
   }
 .dark {
