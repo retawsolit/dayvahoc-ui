@@ -48,7 +48,7 @@
     font-size: 15px; /* Mobile: 15px */
 
     @media (min-width: 768px) {
-      font-size: 16px; /* Tablet: 16px (Chuẩn) */
+      font-size: 15px; /* Tablet: 16px (Chuẩn) */
     }
 
     @media (min-width: 1280px) {

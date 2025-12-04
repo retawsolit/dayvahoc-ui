@@ -10,7 +10,6 @@ export default function MainLayout({ children }: { children: ReactNode }) {
     >
       <Navbar />
 
-      {/* SỬA 1: Padding của thẻ <main> (Khoảng cách từ mép màn hình vào cái khung) */}
       <main className="flex-1 overflow-y-auto 
         px-2 py-3          /* 320px: Rất sát (8px) */
         md:px-4 md:py-6    /* 768px & 1024px: Sát vừa phải (16px) */

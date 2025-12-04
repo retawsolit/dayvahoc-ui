@@ -90,7 +90,7 @@ export default function ContentCard({
         </div>
 
         {/* Mô tả / Chi tiết */}
-        <div className="relative text-sm text-gray-600 dark:text-gray-300 h-[130px] transition-all duration-500 ease-in-out">
+        <div className="relative text-sm text-gray-600 dark:text-gray-300 min-h-[80px] transition-all duration-500 ease-in-out">
           {/* Mô tả ngắn */}
           <div
             className={`absolute inset-0 transition-all duration-500 ease-in-out ${
@@ -160,7 +160,15 @@ export default function ContentCard({
               size="sm"
               variant="outline"
               className="text-blue-600 border-blue-200 hover:bg-blue-50 dark:hover:bg-blue-900/30 gap-1.5 h-8 px-3 text-sm"
-              onClick={() => setShowPreview(true)}
+              onClick={() => {
+                const isMobile = window.innerWidth < 768;
+
+                if (isMobile) {
+                  window.open(item.fileUrl || "", "_blank");
+                } else {
+                  setShowPreview(true);
+                }
+              }}
             >
               <Eye className="w-3.5 h-3.5" />
               Xem

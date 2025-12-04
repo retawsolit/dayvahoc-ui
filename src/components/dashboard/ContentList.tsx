@@ -48,7 +48,7 @@ const mockContents: Content[] = [
     id: "3",
     title: "Chương 5: Network Layer Control Plane",
     description:
-      "Thuật toán định tuyến (Link State, Distance Vector) , các giao thức (OSPF, BGP)",
+      "Thuật toán định tuyến (Link State, Distance Vector), (OSPF, BGP)",
     type: "PPTX",
     category: "Frontend",
     createdAt: "2025-10-25",

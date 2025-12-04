@@ -76,7 +76,9 @@ export default function Navbar() {
             </nav>
 
             {/* Desktop User Dropdown */}
-            <UserDropdown />
+            <div className="hidden md:block">
+              <UserDropdown />
+            </div>
 
             {/* MOBILE MENU */}
             <div className="md:hidden">
@@ -107,12 +109,12 @@ export default function Navbar() {
                   </nav>
 
                   {/* Theme Toggle */}
-                  <div className="px-4 pt-4">
+                  <div className="px-4 pt-1 space-y-1">
                     <ThemeToggle />
                   </div>
 
                   {/* Logout Button */}
-                  <div className="px-4 pt-6 mt-6">
+                  <div className="px-4 pt-1 space-y-1">
                     <Button
                       variant="outline"
                       className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/30 border-red-200 dark:border-red-600"
