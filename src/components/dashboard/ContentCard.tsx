@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { type Content } from "@/types/content";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -25,6 +26,16 @@ export default function ContentCard({
 }) {
   const [hovered, setHovered] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const getFileStyle = (type: string) => {
     switch (type) {
@@ -64,18 +75,36 @@ export default function ContentCard({
 
   const style = getFileStyle(item.type);
   const canPreview = true;
+  const [descKey, setDescKey] = useState("");
+  const [needScroll, setNeedScroll] = useState(false);
+  const descRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+  if (hovered && descRef.current) {
+    const fullHeight = descRef.current.scrollHeight;
+    const maxHeight = 72;
+    setNeedScroll(fullHeight > maxHeight);
+  }
+}, [hovered, item.description]);
 
   return (
     <Card
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className={`relative p-6 border rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 ease-in-out flex flex-col justify-between overflow-hidden
+      onMouseEnter={() => {
+        setHovered(true);
+        setDescKey(item.id + "-" + Date.now());
+      }}
+      onMouseLeave={() => {
+        setHovered(false);
+      }}
+      className={`relative border rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 ease-in-out flex flex-col
         bg-white dark:bg-zinc-800 dark:border-zinc-700
-        ${hovered ? "min-h-[400px]" : "min-h-[220px]"}
+        p-4 sm:p-5 md:p-6
+        ${hovered ? "min-h-[240px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[380px] xl:min-h-[400px]" : "min-h-[200px] sm:min-h-[205px] md:min-h-[215px] lg:min-h-[220px]"}
+        ${hovered && isMobile ? "max-h-[85vh]" : ""}
       `}
     >
       {/* Nội dung */}
-      <div className="space-y-4">
+      <div className={`space-y-3 sm:space-y-4 flex-1 min-h-0 ${hovered && isMobile ? "overflow-y-auto" : ""}`}>
         {/* Icon + title */}
         <div className="flex items-start gap-3">
           <div className={`p-2 rounded-lg shrink-0 ${style.color}`}>
@@ -90,7 +119,7 @@ export default function ContentCard({
         </div>
 
         {/* Mô tả / Chi tiết */}
-        <div className="relative text-sm text-gray-600 dark:text-gray-300 min-h-[80px] transition-all duration-500 ease-in-out">
+        <div className="relative text-sm text-gray-600 dark:text-gray-300 min-h-[60px] sm:min-h-[70px] md:min-h-[80px] transition-all duration-500 ease-in-out">
           {/* Mô tả ngắn */}
           <div
             className={`absolute inset-0 transition-all duration-500 ease-in-out ${
@@ -112,36 +141,47 @@ export default function ContentCard({
             className={`absolute inset-0 transition-all duration-500 ease-in-out ${
               hovered
                 ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-[8px]"
+                : "opacity-0 translate-y-[8px] pointer-events-none"
             }`}
           >
-            <div className="space-y-2 text-sm bg-white dark:bg-zinc-800">
-              <p className="italic mb-3 border-b border-zinc-600/40 pb-2 text-sm leading-snug line-clamp-3">
-                “{item.description}”
-              </p>
-              <p className="flex justify-between">
+            <div className="space-y-1.5 sm:space-y-2 text-sm bg-white dark:bg-zinc-800">
+              <div
+                key={descKey}
+                className="relative h-[60px] sm:h-[72px] overflow-hidden mb-2 sm:mb-3 border-b border-zinc-600/40 pb-2"
+              >
+                <p
+                  ref={descRef}
+                  className={`italic text-sm sm:text-sm leading-snug absolute w-full ${
+                    needScroll ? "animate-scroll-desc" : ""
+                  }`}
+                >
+                  "{item.description}"
+                </p>
+              </div>
+
+              <p className="flex justify-between text-xs sm:text-sm">
                 <span>Loại:</span>
                 <span className="font-medium text-foreground">{item.type}</span>
               </p>
-              <p className="flex justify-between">
+              <p className="flex justify-between text-xs sm:text-sm">
                 <span>Danh mục:</span>
                 <span className="font-medium text-foreground">
                   {item.category}
                 </span>
               </p>
-              <p className="flex justify-between">
+              <p className="flex justify-between text-xs sm:text-sm">
                 <span>Người đăng:</span>
                 <span className="font-medium text-foreground">
                   {item.uploaderRole === "admin" ? "Admin" : "User"}
                 </span>
               </p>
-              <p className="flex justify-between">
+              <p className="flex justify-between text-xs sm:text-sm">
                 <span>Ngày tạo:</span>
                 <span className="font-medium text-foreground">
                   {item.createdAt}
                 </span>
               </p>
-              <p className="flex justify-between">
+              <p className="flex justify-between text-xs sm:text-sm">
                 <span>Dung lượng:</span>
                 <span className="font-medium text-foreground">
                   {item.size}
@@ -153,7 +193,7 @@ export default function ContentCard({
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-6 border-t border-gray-200 dark:border-zinc-700 mt-auto">
+      <div className={`flex items-center justify-between pt-2.5 sm:pt-3 md:pt-5 lg:pt-6 border-t border-gray-200 dark:border-zinc-700 shrink-0`}>
         <div>
           {canPreview && (
             <Button

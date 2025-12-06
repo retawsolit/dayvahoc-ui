@@ -34,7 +34,7 @@ const mockContents: Content[] = [
     id: "2",
     title: "Bài thực hành Lab 4 - Shell Script",
     description:
-      "Các thao tác cơ bản, và câu lệnh điều kiện trong Shell Script (bash).",
+      "Các thao tác cơ bản, và câu lệnh điều kiện trong Shell Script (bash). abcdefghijklmnopqrstuvwxyz",
     type: "DOCX",
     category: "Lập trình",
     createdAt: "2025-10-28",
@@ -48,7 +48,7 @@ const mockContents: Content[] = [
     id: "3",
     title: "Chương 5: Network Layer Control Plane",
     description:
-      "Thuật toán định tuyến (Link State, Distance Vector), (OSPF, BGP)",
+      "Thuật toán định tuyến (Link State, Distance Vector), (OSPF, BGP) abcdefghijklmnopqrstuvwxyz",
     type: "PPTX",
     category: "Frontend",
     createdAt: "2025-10-25",

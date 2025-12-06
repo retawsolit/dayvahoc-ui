@@ -94,4 +94,23 @@
   --chart-5: 340 75% 55%;
 }
 
+@keyframes scroll-desc {
+  0% {
+    transform: translateY(100%);
+  }
+  10% {
+    transform: translateY(0%);
+  }
+  90% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-scroll-desc {
+  animation: scroll-desc 8s linear infinite;
+}
+
 }

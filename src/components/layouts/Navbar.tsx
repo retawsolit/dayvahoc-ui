@@ -25,7 +25,7 @@ export default function Navbar() {
           "flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors",
           isActive
             ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400"
-            : "text-muted-foreground hover:text-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            : "text-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800"
         )
       }
     >
@@ -116,8 +116,8 @@ export default function Navbar() {
                   {/* Logout Button */}
                   <div className="px-4 pt-1 space-y-1">
                     <Button
-                      variant="outline"
-                      className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/30 border-red-200 dark:border-red-600"
+                      variant="ghost"
+                      className="w-full justify-start text-red-600 hover:text-red-700"
                       onClick={() => {
                         logout();
                         navigate("/");
