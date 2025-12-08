@@ -93,29 +93,24 @@ export default function ContentCard({
   return (
     <Card
       onMouseEnter={() => {
-  // Clear timeout cũ nếu có
   if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-  // Mở card (height) trước
   setExpanded(true);
 
-  // Sau delay ngắn mới hiển thị nội dung
   timeoutRef.current = setTimeout(() => {
     setHovered(true);
     setDescKey(item.id + "-" + Date.now());
-  }, 180); // bạn có thể chỉnh 100–250ms tùy cảm giác
+  }, 180);
 }}
 
 onMouseLeave={() => {
   if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-  // Tắt nội dung (chữ) trước
   setHovered(false);
 
-  // Sau đó thu card lại
   timeoutRef.current = setTimeout(() => {
     setExpanded(false);
-  }, 250); // delay này ≥ thời gian fade-out chữ
+  }, 250);
 }}
       className={`relative border rounded-2xl shadow-sm hover:shadow-md transition-all duration-500 ease-in-out flex flex-col
         bg-white dark:bg-zinc-800 dark:border-zinc-700
