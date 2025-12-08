@@ -21,7 +21,7 @@ export default function ContentPage() {
   return (
     <MainLayout>
       {!showForm && (
-        <div className="bg-background py-6">
+        <div className="py-6">
           <div className="max-w-screen-xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
             <h1 className="text-3xl font-bold">Tài liệu</h1>
             

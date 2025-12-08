@@ -78,6 +78,9 @@ export default function ContentCard({
   const [descKey, setDescKey] = useState("");
   const [needScroll, setNeedScroll] = useState(false);
   const descRef = useRef<HTMLParagraphElement>(null);
+ 
+  const [expanded, setExpanded] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
   if (hovered && descRef.current) {
@@ -90,16 +93,37 @@ export default function ContentCard({
   return (
     <Card
       onMouseEnter={() => {
-        setHovered(true);
-        setDescKey(item.id + "-" + Date.now());
-      }}
-      onMouseLeave={() => {
-        setHovered(false);
-      }}
-      className={`relative border rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 ease-in-out flex flex-col
+  // Clear timeout cũ nếu có
+  if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+  // Mở card (height) trước
+  setExpanded(true);
+
+  // Sau delay ngắn mới hiển thị nội dung
+  timeoutRef.current = setTimeout(() => {
+    setHovered(true);
+    setDescKey(item.id + "-" + Date.now());
+  }, 180); // bạn có thể chỉnh 100–250ms tùy cảm giác
+}}
+
+onMouseLeave={() => {
+  if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+  // Tắt nội dung (chữ) trước
+  setHovered(false);
+
+  // Sau đó thu card lại
+  timeoutRef.current = setTimeout(() => {
+    setExpanded(false);
+  }, 250); // delay này ≥ thời gian fade-out chữ
+}}
+      className={`relative border rounded-2xl shadow-sm hover:shadow-md transition-all duration-500 ease-in-out flex flex-col
         bg-white dark:bg-zinc-800 dark:border-zinc-700
         p-4 sm:p-5 md:p-6
-        ${hovered ? "min-h-[240px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[380px] xl:min-h-[400px]" : "min-h-[200px] sm:min-h-[205px] md:min-h-[215px] lg:min-h-[220px]"}
+        ${expanded 
+          ? "min-h-[240px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[380px] xl:min-h-[400px]"
+          : "min-h-[200px] sm:min-h-[205px] md:min-h-[215px] lg:min-h-[220px]"
+        }
         ${hovered && isMobile ? "max-h-[85vh]" : ""}
       `}
     >
@@ -119,13 +143,13 @@ export default function ContentCard({
         </div>
 
         {/* Mô tả / Chi tiết */}
-        <div className="relative text-sm text-gray-600 dark:text-gray-300 min-h-[60px] sm:min-h-[70px] md:min-h-[80px] transition-all duration-500 ease-in-out">
+        <div className="relative text-sm text-gray-600 dark:text-gray-300 min-h-[60px] sm:min-h-[70px] md:min-h-[80px] transition-all duration-250 delay-0 ease-in">
           {/* Mô tả ngắn */}
           <div
-            className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+            className={`absolute inset-0 transition-all ease-in-out ${
               hovered
-                ? "opacity-0 translate-y-[-8px] pointer-events-none"
-                : "opacity-100 translate-y-0"
+                ? "opacity-0 -translate-y-[8px] pointer-events-none delay-0 duration-200"
+                : "opacity-100 translate-y-0 delay-100 duration-400"
             }`}
           >
             <div className="space-y-2">
@@ -138,12 +162,13 @@ export default function ContentCard({
 
           {/* Chi tiết khi hover */}
           <div
-            className={`absolute inset-0 transition-all duration-500 ease-in-out ${
+            className={`absolute inset-0 transition-all ease-in-out ${
               hovered
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-[8px] pointer-events-none"
+                ? "opacity-100 translate-y-0 duration-500 delay-150"
+                : "opacity-0 translate-y-2 pointer-events-none duration-200"
             }`}
           >
+
             <div className="space-y-1.5 sm:space-y-2 text-sm bg-white dark:bg-zinc-800">
               <div
                 key={descKey}
