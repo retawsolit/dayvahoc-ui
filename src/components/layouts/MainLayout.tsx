@@ -26,11 +26,11 @@ export default function MainLayout({ children }: { children: ReactNode }) {
             
             shadow-md 
             
-            /* SỬA 2: Padding bên trong cái khung (Khoảng cách từ viền khung vào nội dung) */
+            /*(Khoảng cách từ viền khung vào nội dung) */
             p-2                /* 320px: Cực gọn (8px) */
             sm:p-4             /* Mobile lớn: (16px) */
-            md:p-6             /* 768px & 1024px: (24px) */
-            xl:p-10            /* 1440px+: (40px) */
+            md:p-4             /* 768px & 1024px: (24px) */
+            xl:p-4            /* 1440px+: (40px) */
             
             transition-colors duration-300"
         >

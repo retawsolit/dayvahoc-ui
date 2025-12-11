@@ -116,14 +116,13 @@ onMouseLeave={() => {
         bg-white dark:bg-zinc-800 dark:border-zinc-700
         p-4 sm:p-5 md:p-6
         ${expanded 
-          ? "min-h-[240px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[380px] xl:min-h-[400px]"
-          : "min-h-[200px] sm:min-h-[205px] md:min-h-[215px] lg:min-h-[220px]"
+          ? "min-h-[300px] sm:min-h-[320px] md:min-h-[380px] lg:min-h-[380px] xl:min-h-[400px]"
+          : "min-h-[220px] sm:min-h-[230px] md:min-h-[240px] lg:min-h-[220px]"
         }
-        ${hovered && isMobile ? "max-h-[85vh]" : ""}
       `}
     >
       {/* Nội dung */}
-      <div className={`space-y-3 sm:space-y-4 flex-1 min-h-0 ${hovered && isMobile ? "overflow-y-auto" : ""}`}>
+      <div className={`space-y-3 sm:space-y-4 flex-1 min-h-0`}>
         {/* Icon + title */}
         <div className="flex items-start gap-3">
           <div className={`p-2 rounded-lg shrink-0 ${style.color}`}>
